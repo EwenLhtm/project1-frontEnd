@@ -1,0 +1,29 @@
+<div class="card m-3">
+    <h5 class="card-header">Liste des étudiants</h5>
+    <div class="card-body">
+        <p class="card-text">Voici la liste des étudiants enregistrés dans le système.</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let etudiant of etudiants; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ etudiant.lastName }}</td>
+                    <td>{{ etudiant.firstName }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm mr-1">Details</button>
+                        <button class="btn btn-primary btn-sm mr-1">Modifier</button>
+                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="#" class="btn btn-secondary">Ajouter un étudiant</a>
+    </div>
+</div>
