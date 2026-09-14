@@ -73,8 +73,7 @@ export class EtuUpdateComponent implements OnInit {
             });
     }
 
-    onReset(): void {
-        this.submitted = false;
-        this.updateForm.reset();
+    goBack(): void {
+        this.router.navigate(['/etudiant']);
     }
 }
