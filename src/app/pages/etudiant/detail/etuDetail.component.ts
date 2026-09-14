@@ -25,8 +25,13 @@ export class EtuDetailComponent implements OnInit {
             const id = Number(params.get('id'));
             this.etudiantService.getEtudiantById(id)
                 .pipe(takeUntilDestroyed(this.destroyRef))
-                .subscribe((response: any) => {
-                    this.etudiant = response;
+                .subscribe({
+                    next: (response: any) => {
+                        this.etudiant = response;
+                    },
+                    error: () => {
+                        this.router.navigate(['/etudiant']);
+                    }
                 });
         })
     }
