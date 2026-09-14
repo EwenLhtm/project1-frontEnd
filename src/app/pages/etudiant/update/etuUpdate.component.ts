@@ -37,13 +37,18 @@ export class EtuUpdateComponent implements OnInit {
                 const id = Number(params.get('id'));
                 this.etudiantService.getEtudiantById(id)
                     .pipe(takeUntilDestroyed(this.destroyRef))
-                    .subscribe(etudiant => {
-                        this.etudiant = etudiant;
-                        this.updateForm.patchValue({
-                            firstName: etudiant.firstName,
-                            lastName: etudiant.lastName,
-                            email: etudiant.email
-                        });
+                    .subscribe({
+                        next: (etudiant: Etudiant) => {
+                            this.etudiant = etudiant;
+                            this.updateForm.patchValue({
+                                firstName: etudiant.firstName,
+                                lastName: etudiant.lastName,
+                                email: etudiant.email
+                            });
+                        },
+                        error: () => {
+                            this.router.navigate(['/etudiant']);
+                        }
                     });
             });
     }
