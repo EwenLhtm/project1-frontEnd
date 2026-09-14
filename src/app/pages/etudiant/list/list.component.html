@@ -17,13 +17,11 @@
                     <td>{{ etudiant.lastName }}</td>
                     <td>{{ etudiant.firstName }}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm mr-1">Details</button>
-                        <button class="btn btn-primary btn-sm mr-1">Modifier</button>
-                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                        <button class="btn btn-primary btn-sm mr-1" (click)="detailEtudiant(etudiant.id)">Details</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <a href="#" class="btn btn-secondary">Ajouter un étudiant</a>
+        <button class="btn btn-secondary">Ajouter un étudiant</button>
     </div>
 </div>

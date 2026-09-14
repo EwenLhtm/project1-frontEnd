@@ -1,0 +1,23 @@
+<div class="card m-3">
+    <h5 class="card-header">Détails de l'étudiant</h5>
+    <div class="card-body">
+        <p class="card-text">Voici les détails de l'étudiant sélectionné.</p>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th scope="row">Nom</th>
+                    <td>{{ etudiant?.lastName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Prénom</th>
+                    <td>{{ etudiant?.firstName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{ etudiant?.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-secondary" (click)="goBack()">Retour à la liste</button>
+    </div>
+</div>

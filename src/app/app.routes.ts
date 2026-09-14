@@ -3,6 +3,7 @@ import {AppComponent} from './app.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {LoginComponent} from './pages/login/login.component';
 import {listComponent} from './pages/etudiant/list/list.component';
+import {EtuDetailComponent} from './pages/etudiant/detail/etuDetail.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,18 @@ export const routes: Routes = [
   {
     path: 'etudiant',
     component: listComponent
-  }
+  },
+  {
+    path: 'etudiant/detail/:id',
+    component: EtuDetailComponent
+  },
+  // {
+  //   path: 'etudiant/update/:id',
+  //   component: UpdateComponent
+  // },
+  // {
+  //   path: 'etudiant/delete/:id',
+  //   component: DeleteComponent
+  // }
 
 ];

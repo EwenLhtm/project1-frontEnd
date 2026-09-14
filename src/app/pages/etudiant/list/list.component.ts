@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { MaterialModule } from '../../../shared/material.module';
 import { EtudiantService } from '../../../core/service/etudiant.service';
 import { Etudiant } from '../../../core/models/Etudiant';
-import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -17,6 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class listComponent implements OnInit {
     private etudiantService = inject(EtudiantService);
     private destroyRef = inject(DestroyRef);
+    private router = inject(Router);
     etudiants: Etudiant[] = [];
 
 
@@ -27,4 +27,16 @@ export class listComponent implements OnInit {
                 this.etudiants = response;
             })
     }
+
+    detailEtudiant(id: number) {
+        this.router.navigate(['/etudiant/detail', id]);
+    }
+
+    // updateEtudiant(id: number) {
+    //     this.router.navigate(['/etudiant/update', id]);
+    // }
+
+    // deleteEtudiant(id: number) {
+    //     this.router.navigate(['/etudiant/delete', id]);
+    // }
 }
