@@ -28,4 +28,9 @@ export class EtudiantService {
         const headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
         return this.httpClient.put(`/api/etudiant/${id}`, etudiant, { headers });
     }
+
+    deleteEtudiant(id: number): Observable<Object> {
+        const headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
+        return this.httpClient.delete(`/api/etudiant/${id}`, { headers });
+    }
 }

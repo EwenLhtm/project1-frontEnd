@@ -1,0 +1,26 @@
+<div class="card m-3">
+    <h5 class="card-title">Supprimer un étudiant</h5>
+    <div class="card-body">
+        <p class="card-text">Êtes-vous sûr de vouloir supprimer cet étudiant ?</p>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th scope="row">Nom</th>
+                    <td>{{ etudiant?.lastName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Prénom</th>
+                    <td>{{ etudiant?.firstName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{ etudiant?.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button class="btn btn-danger" (click)="deleteEtudiant()">Supprimer</button>
+            <button class="btn btn-secondary" (click)="goBack()">Retour</button>
+        </div>
+    </div>
+</div>

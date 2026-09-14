@@ -6,6 +6,7 @@ import {listComponent} from './pages/etudiant/list/list.component';
 import {EtuDetailComponent} from './pages/etudiant/detail/etuDetail.component';
 import {EtuCreateComponent} from './pages/etudiant/create/etuCreate.component';
 import {EtuUpdateComponent} from './pages/etudiant/update/etuUpdate.component';
+import {EtuDeleteComponent} from './pages/etudiant/delete/etuDelete.component';
 
 export const routes: Routes = [
   {
@@ -37,9 +38,9 @@ export const routes: Routes = [
     path: 'etudiant/update/:id',
     component: EtuUpdateComponent
   },
-  // {
-  //   path: 'etudiant/delete/:id',
-  //   component: DeleteComponent
-  // }
+  {
+    path: 'etudiant/delete/:id',
+    component: EtuDeleteComponent
+  }
 
 ];
