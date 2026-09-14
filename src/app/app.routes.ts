@@ -5,6 +5,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {listComponent} from './pages/etudiant/list/list.component';
 import {EtuDetailComponent} from './pages/etudiant/detail/etuDetail.component';
 import {EtuCreateComponent} from './pages/etudiant/create/etuCreate.component';
+import {EtuUpdateComponent} from './pages/etudiant/update/etuUpdate.component';
 
 export const routes: Routes = [
   {
@@ -31,11 +32,11 @@ export const routes: Routes = [
   {
     path: 'etudiant/create',
     component: EtuCreateComponent
-  }
-  // {
-  //   path: 'etudiant/update/:id',
-  //   component: UpdateComponent
-  // },
+  },
+  {
+    path: 'etudiant/update/:id',
+    component: EtuUpdateComponent
+  },
   // {
   //   path: 'etudiant/delete/:id',
   //   component: DeleteComponent

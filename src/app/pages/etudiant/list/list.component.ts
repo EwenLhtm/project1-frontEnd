@@ -32,9 +32,9 @@ export class listComponent implements OnInit {
         this.router.navigate(['/etudiant/detail', id]);
     }
 
-    // updateEtudiant(id: number) {
-    //     this.router.navigate(['/etudiant/update', id]);
-    // }
+    updateEtudiant(id: number) {
+        this.router.navigate(['/etudiant/update', id]);
+    }
 
     // deleteEtudiant(id: number) {
     //     this.router.navigate(['/etudiant/delete', id]);

@@ -8,7 +8,7 @@ import { Etudiant } from '../../../core/models/Etudiant';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-etudiant-detail',
+    selector: 'app-etudiant-Create',
     imports: [CommonModule, MaterialModule],
     templateUrl: './etuCreate.component.html',
     standalone: true,
