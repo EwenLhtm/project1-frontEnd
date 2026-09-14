@@ -4,6 +4,7 @@ import {RegisterComponent} from './pages/register/register.component';
 import {LoginComponent} from './pages/login/login.component';
 import {listComponent} from './pages/etudiant/list/list.component';
 import {EtuDetailComponent} from './pages/etudiant/detail/etuDetail.component';
+import {EtuCreateComponent} from './pages/etudiant/create/etuCreate.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,10 @@ export const routes: Routes = [
     path: 'etudiant/detail/:id',
     component: EtuDetailComponent
   },
+  {
+    path: 'etudiant/create',
+    component: EtuCreateComponent
+  }
   // {
   //   path: 'etudiant/update/:id',
   //   component: UpdateComponent

@@ -39,4 +39,8 @@ export class listComponent implements OnInit {
     // deleteEtudiant(id: number) {
     //     this.router.navigate(['/etudiant/delete', id]);
     // }
+
+    createEtudiant() {
+        this.router.navigate(['/etudiant/create']);
+    }
 }
