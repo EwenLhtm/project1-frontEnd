@@ -23,8 +23,14 @@ export class listComponent implements OnInit {
     ngOnInit() {
         this.etudiantService.getEtudiants()
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((response: any) => {
-                this.etudiants = response;
+            .subscribe({
+                next: (response: any) => {
+                    this.etudiants = response;
+                },
+                error: () => {
+                    this.router.navigate(['/login']);
+                }
+                 
             })
     }
 

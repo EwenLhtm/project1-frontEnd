@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './auth-guard.guard';
 import {AppComponent} from './app.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {LoginComponent} from './pages/login/login.component';
@@ -24,23 +25,28 @@ export const routes: Routes = [
   },
   {
     path: 'etudiant',
-    component: listComponent
+    component: listComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'etudiant/detail/:id',
-    component: EtuDetailComponent
+    component: EtuDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'etudiant/create',
-    component: EtuCreateComponent
+    component: EtuCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'etudiant/update/:id',
-    component: EtuUpdateComponent
+    component: EtuUpdateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'etudiant/delete/:id',
-    component: EtuDeleteComponent
+    component: EtuDeleteComponent,
+    canActivate: [AuthGuard]
   }
 
 ];
