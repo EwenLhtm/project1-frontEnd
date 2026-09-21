@@ -59,6 +59,9 @@ export class EtuUpdateComponent implements OnInit {
 
     onSubmit(): void {
         this.submitted = true;
+        if (this.updateForm.invalid || !this.etudiant) {
+            return;
+        }
         const updatedEtudiant: Etudiant = {
             firstName: this.updateForm.get('firstName')?.value,
             lastName: this.updateForm.get('lastName')?.value,
