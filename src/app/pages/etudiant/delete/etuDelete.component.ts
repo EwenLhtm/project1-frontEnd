@@ -43,9 +43,6 @@ export class EtuDeleteComponent implements OnInit {
                 .subscribe({
                     next: () => {
                         this.router.navigate(['/etudiant']);
-                    },
-                    error: (error) => {
-                        console.error('Error deleting etudiant:', error);
                     }
                 });
         }

@@ -57,7 +57,7 @@ describe('EtuCreateComponent', () => {
         expect(etudiantServiceMock.createEtudiant).toHaveBeenCalled();
     });
 
-    describe('onSubmit', () => {
+    describe('onIgnit', () => {
         it('should create form with required validators', () => {
             expect(component.createForm).toBeDefined();
             expect(component.createForm.get('firstName')?.validator).toBeDefined();

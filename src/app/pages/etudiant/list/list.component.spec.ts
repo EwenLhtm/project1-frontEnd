@@ -56,6 +56,14 @@ describe('listComponent' , () => {
 
             expect(component.etudiants).toEqual(mockEtudiants);
         });
+        it('should go to login page on error', () => {
+            etudiantServiceMock.getEtudiants.mockReturnValue(throwError(() => new Error('Error fetching etudiants')));
+
+            component.ngOnInit();
+
+            expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+        });
+
     });
     
     describe('Router navigation methods', () => {

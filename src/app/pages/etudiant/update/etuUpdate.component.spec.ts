@@ -85,6 +85,13 @@ describe('EtuUpdateComponent', () => {
             expect(form.controls['email'].hasError('required')).toBe(false);
             expect(form.controls['email'].hasError('email')).toBe(false);
         });
+        it('should go to etudiant page on error', () => {
+            etudiantServiceMock.getEtudiantById.mockReturnValue(throwError(() => new Error('Error fetching etudiant')));
+
+            component.ngOnInit();
+
+            expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant']);
+        });
     });
 
     describe('form getter', () => {
