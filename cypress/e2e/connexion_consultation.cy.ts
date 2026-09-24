@@ -1,7 +1,11 @@
 describe('Connexion et Consultation', () => {
     beforeEach(() => {
-        cy.login('test', 'test');
         cy.visit('/login');
+    });
+
+    it('should go back to the login page when try to access etudiant list page without login', () => {
+        cy.visit('/etudiant');
+        cy.url().should('include', '/login');
     });
 
     it('should display the login form', () => {
@@ -20,6 +24,7 @@ describe('Connexion et Consultation', () => {
     });
 
     it('should display the etudiant list', () => {
+        cy.login('test','test');
         cy.visit('/etudiant');
         cy.get('table').should('be.visible');
         cy.get('tbody tr').should('be.visible'); 
