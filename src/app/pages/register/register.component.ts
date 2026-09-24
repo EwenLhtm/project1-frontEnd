@@ -50,12 +50,11 @@ export class RegisterComponent implements OnInit {
     };
     this.userService.register(registerUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-      () => {
-        alert('SUCCESS!! :-)');
-        this.router.navigate(['/login']);
-      },
-    );
+      .subscribe({
+        next : () => {
+          this.router.navigate(['/login']);
+        }
+      });
   }
 
   onReset(): void {

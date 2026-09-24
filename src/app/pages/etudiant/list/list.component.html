@@ -17,13 +17,13 @@
                     <td>{{ etudiant.lastName }}</td>
                     <td>{{ etudiant.firstName }}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm mr-1" (click)="detailEtudiant($any(etudiant.id))">Details</button>
-                        <button class="btn btn-secondary btn-sm" (click)="updateEtudiant($any(etudiant.id))">Update</button>
-                        <button class="btn btn-danger btn-sm ml-1" (click)="deleteEtudiant($any(etudiant.id))">Delete</button>
+                        <button class="btn btn-primary btn-sm mr-1" name="detailEtudiant" (click)="detailEtudiant($any(etudiant.id))">Details</button>
+                        <button class="btn btn-secondary btn-sm" name="editEtudiant" (click)="updateEtudiant($any(etudiant.id))">Update</button>
+                        <button class="btn btn-danger btn-sm ml-1" name="deleteEtudiant" (click)="deleteEtudiant($any(etudiant.id))">Delete</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button class="btn btn-secondary" (click)="createEtudiant()">Ajouter un étudiant</button>
+        <button class="btn btn-secondary" name="createEtudiant" (click)="createEtudiant()">Ajouter un étudiant</button>
     </div>
 </div>
