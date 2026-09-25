@@ -19,6 +19,7 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// Rend disponible le montage des composants Angular dans les tests.
 import { mount } from 'cypress/angular'
 
 // Augment the Cypress namespace to include type definitions for
@@ -33,6 +34,7 @@ declare global {
   }
 }
 
+// Enregistre la commande reutilisable `cy.mount`.
 Cypress.Commands.add('mount', mount)
 
 // Example use:

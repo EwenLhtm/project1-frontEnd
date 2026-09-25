@@ -14,12 +14,14 @@ const routerMock = {
     navigate: jest.fn()
 };
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('listComponent' , () => {
     let component: listComponent;
     let fixture: ComponentFixture<listComponent>;
     let etudiantService: EtudiantService;
     let router: Router;
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(async () => {
         etudiantServiceMock.getEtudiants.mockReset();
         routerMock.navigate.mockReset();
@@ -43,11 +45,14 @@ describe('listComponent' , () => {
         fixture.detectChanges();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('ngOnInit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should fetch etudiants and assign to component', () => {
             const mockEtudiants = [{ id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' }];
             etudiantServiceMock.getEtudiants.mockReturnValue(of(mockEtudiants));
@@ -56,6 +61,7 @@ describe('listComponent' , () => {
 
             expect(component.etudiants).toEqual(mockEtudiants);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should go to login page on error', () => {
             etudiantServiceMock.getEtudiants.mockReturnValue(throwError(() => new Error('Error fetching etudiants')));
 
@@ -65,23 +71,28 @@ describe('listComponent' , () => {
         });
 
     });
-    
+
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('Router navigation methods', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to detail page', () => {
             const id = 1;
             component.detailEtudiant(id);
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant/detail', id]);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to update page', () => {
             const id = 1;
             component.updateEtudiant(id);
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant/update', id]);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to delete page', () => {
             const id = 1;
             component.deleteEtudiant(id);
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant/delete', id]);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to create page', () => {
             component.createEtudiant();
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant/create']);

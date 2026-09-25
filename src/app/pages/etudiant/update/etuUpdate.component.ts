@@ -25,6 +25,7 @@ export class EtuUpdateComponent implements OnInit {
     submitted: boolean = false;
 
 
+    // Initialisation du composant et chargement des donnees necessaires.
     ngOnInit() {
         this.updateForm = this.formBuilder.group({
             firstName: ['', Validators.required],
@@ -57,6 +58,7 @@ export class EtuUpdateComponent implements OnInit {
         return this.updateForm.controls;
     }
 
+    // Validation du formulaire et declenchement de l operation demandee.
     onSubmit(): void {
         this.submitted = true;
         if (this.updateForm.invalid || !this.etudiant) {
@@ -81,6 +83,7 @@ export class EtuUpdateComponent implements OnInit {
             });
     }
 
+    // Execution de cette operation du composant ou du service.
     goBack(): void {
         this.router.navigate(['/etudiant']);
     }

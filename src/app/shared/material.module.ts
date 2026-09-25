@@ -29,6 +29,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+// Regroupe les modules Material et les formulaires utilises par les composants.
 const materialModules = [
   ReactiveFormsModule,
   CdkTreeModule,

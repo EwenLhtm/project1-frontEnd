@@ -24,12 +24,14 @@ const routeMock = {
     })
 };
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('EtuUpdateComponent', () => {
     let component: EtuUpdateComponent;
     let fixture: ComponentFixture<EtuUpdateComponent>;
     let etudiantService: EtudiantService;
     let router: Router;
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(async () => {
         etudiantServiceMock.getEtudiantById.mockReset();
         etudiantServiceMock.updateEtudiant.mockReset();
@@ -60,11 +62,14 @@ describe('EtuUpdateComponent', () => {
         fixture.detectChanges();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('ngOnInit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should create form with etudiant data when etudiant is fetched successfully', () => {
             const mockEtudiant = { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@gmail.com' };
             etudiantServiceMock.getEtudiantById.mockReturnValue(of(mockEtudiant));
@@ -85,6 +90,7 @@ describe('EtuUpdateComponent', () => {
             expect(form.controls['email'].hasError('required')).toBe(false);
             expect(form.controls['email'].hasError('email')).toBe(false);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should go to etudiant page on error', () => {
             etudiantServiceMock.getEtudiantById.mockReturnValue(throwError(() => new Error('Error fetching etudiant')));
 
@@ -94,20 +100,25 @@ describe('EtuUpdateComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('form getter', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return from controls', () => {
             const controls = component.form;
             expect(controls).toBe(component.updateForm.controls);
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('onSubmit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should set submitted to true', () => {
             etudiantServiceMock.updateEtudiant.mockReturnValue(of({}));
             component.onSubmit();
             expect(component.submitted).toBe(true);
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should not call register if form is invalid', () => {
             component.updateForm.patchValue({
                 firstName: '',
@@ -118,6 +129,7 @@ describe('EtuUpdateComponent', () => {
             expect(etudiantServiceMock.updateEtudiant).not.toHaveBeenCalled();
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should call updateEtudiant when form is valid', () => {
             component.updateForm.patchValue({
                 firstName: 'John',
@@ -139,6 +151,7 @@ describe('EtuUpdateComponent', () => {
             );
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to /etudiant on successful update', () => {
             etudiantServiceMock.updateEtudiant.mockReturnValue(of(null));
 
@@ -153,6 +166,7 @@ describe('EtuUpdateComponent', () => {
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant']);
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should NOT navigate on error', () => {
             etudiantServiceMock.updateEtudiant.mockReturnValue(throwError(() => new Error('Error')));
 
@@ -164,7 +178,9 @@ describe('EtuUpdateComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('goBack', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should navigate back to etudiant list', () => {
             component.goBack();
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant']);

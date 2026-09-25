@@ -13,6 +13,6 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// When a command from ./commands is ready to use, import with `import './commands'` syntax
+// Charge les commandes et extensions communes avant l execution des scenarios E2E.
 import './commands';
 import '@cypress/code-coverage/support';

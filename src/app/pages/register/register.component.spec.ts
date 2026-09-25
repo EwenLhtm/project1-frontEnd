@@ -23,11 +23,13 @@ const routerMock = {
 };
 
 describe('RegisterComponent', () => {
+  // Déclaration des variables pour le composant, le fixture, le service utilisateur et le routeur
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
   let userService: UserService;
   let router: Router;
 
+  // Configuration du module de test avant chaque test
   beforeEach(async () => {
     userServiceMock.register.mockReset();
     routerMock.navigate.mockReset();
@@ -50,12 +52,15 @@ describe('RegisterComponent', () => {
   });
 
   it('should create', () => {
+    // Vérifie que le composant est créé avec succés
     expect(component).toBeTruthy();
   });
 
   it('should call userService.register when form is valid', () => {
+    // Vérifie que la méthode register du service utilisateur est appelée lorsque le formulaire est valide
     userServiceMock.register.mockReturnValue(of(null));
 
+    // Remplit le formulaire avec des valeurs valides
     component.registerForm.patchValue({
       firstName: 'John',
       lastName: 'Doe',
@@ -64,23 +69,27 @@ describe('RegisterComponent', () => {
     });
     component.onSubmit();
 
+    // Vérifie que la méthode register du service utilisateur a été appelée avec les bonnes valeurs
     expect(userServiceMock.register).toHaveBeenCalled();
   });
 
   describe('ngOnInit', () => {
     it('should create form with required validators', () => {
+      // Vérifie que le formulaire est créé avec les validateurs requis
       expect(component.registerForm).toBeDefined();
       expect(component.registerForm.controls['firstName']).toBeDefined();
       expect(component.registerForm.controls['lastName']).toBeDefined();
       expect(component.registerForm.controls['login']).toBeDefined();
       expect(component.registerForm.controls['password']).toBeDefined();
 
+      // Definit les valeurs du formulaire Ã  des chaÃ®nes vides pour tester la validation
       const form = component.registerForm;;
       form.controls['firstName'].setValue('');
       form.controls['lastName'].setValue('');
       form.controls['login'].setValue('');
       form.controls['password'].setValue('');
 
+      // Vérifie que le formulaire est invalide lorsque tous les champs sont vides
       expect(form.valid).toBe(false);
       expect(form.controls['firstName'].hasError('required')).toBe(true);
       expect(form.controls['lastName'].hasError('required')).toBe(true);
@@ -91,6 +100,7 @@ describe('RegisterComponent', () => {
 
   describe('form getter', () => {
     it('should return form controls', () => {
+      // Vérifie que le getter form retourne les contrÃ´les du formulaire
       const controls = component.form;
       expect(controls).toEqual(component.registerForm.controls);
     });
@@ -98,16 +108,19 @@ describe('RegisterComponent', () => {
 
   describe('onSubmit', () => {
     it('should set submitted to true', () => {
+      // Vérifie que la variable submitted est définie sur true aprés l'appel de la méthode onSubmit
       component.onSubmit();
       expect(component.submitted).toBe(true);
     });
 
     it('should not call register if form is invalid', () => {
+      // Vérifie que la méthode register du service utilisateur n'est pas appelée si le formulaire est invalide
       component.onSubmit();
       expect(userServiceMock.register).not.toHaveBeenCalled();
     });
 
     it('should call userService.register when form is valid', () => {
+      // Vérifie que la méthode register du service utilisateur est appelée avec les bonnes valeurs lorsque le formulaire est valide
       component.registerForm.patchValue({
         firstName: 'John',
         lastName: 'Doe',
@@ -115,10 +128,13 @@ describe('RegisterComponent', () => {
         password: 'password123',
       });
 
+      // Mock la méthode register du service utilisateur pour qu'elle retourne un Observable vide
       userServiceMock.register.mockReturnValue(of(null));
 
+      // Appelle la méthode onSubmit pour soumettre le formulaire
       component.onSubmit();
 
+      // Vérifie que la méthode register du service utilisateur a été appelée avec les bonnes valeurs
       expect(userServiceMock.register).toHaveBeenCalledWith({
         firstName: 'John',
         lastName: 'Doe',
@@ -128,8 +144,10 @@ describe('RegisterComponent', () => {
     });
 
     it('should navigate to /login on success', () => {
+      // Mock la méthode register du service utilisateur pour qu'elle retourne un Observable vide
       userServiceMock.register.mockReturnValue(of(null));
 
+      // Remplit le formulaire avec des valeurs valides
       component.registerForm.patchValue({
         firstName: 'Jane',
         lastName: 'Smith',
@@ -137,14 +155,18 @@ describe('RegisterComponent', () => {
         password: 'securepass',
       });
 
+      // Appelle la méthode onSubmit pour soumettre le formulaire
       component.onSubmit();
 
+      // Vérifie que la méthode navigate du routeur a été appelée avec le chemin '/login' aprés un enregistrement réussi
       expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
     });
 
     it('should show alert on success', (done) => {
+      // Mock l'alert pour vérifier qu'il est appelé aprés un enregistrement réussi
       const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
 
+      // Remplit le formulaire avec des valeurs valides
       component.registerForm.patchValue({
         firstName: 'Test',
         lastName: 'User',
@@ -152,9 +174,11 @@ describe('RegisterComponent', () => {
         password: 'testpass',
       });
 
+      // Mock la méthode register du service utilisateur pour qu'elle retourne un Observable vide
       userServiceMock.register.mockReturnValue(of(null));
       component.onSubmit();
 
+      // Vérifie que l'alerte a été appelée aprés un enregistrement réussi
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
@@ -164,20 +188,25 @@ describe('RegisterComponent', () => {
     });
 
     it('should NOT navigate on error', () => {
+      // Mock la méthode register du service utilisateur pour qu'elle retourne une erreur
       userServiceMock.register.mockReturnValue(
         throwError(() => new Error('API Error'))
       );
 
+      // Remplit le formulaire avec des valeurs vides
       component.registerForm.patchValue({});
 
+      // Appelle la méthode onSubmit pour soumettre le formulaire
       component.onSubmit();
 
+      // Vérifie que la méthode navigate du routeur n'a pas été appelée aprés une erreur d'enregistrement
       expect(routerMock.navigate).not.toHaveBeenCalled();
     });
   });
 
   describe('onReset', () => {
     it('should reset form and set submitted to false', () => {
+      // Vérifie que la méthode onReset réinitialise le formulaire et définit la variable submitted sur false
       component.submitted = true;
       component.registerForm.patchValue({
         firstName: 'Test',
@@ -186,8 +215,10 @@ describe('RegisterComponent', () => {
         password: 'testpass',
       });
 
+      // Appelle la méthode onReset pour réinitialiser le formulaire
       component.onReset();
 
+      // Vérifie que la variable submitted est définie sur false et que les valeurs du formulaire sont réinitialisées
       expect(component.submitted).toBe(false);
       expect(component.registerForm.value).toEqual({
         firstName: null,
@@ -200,6 +231,7 @@ describe('RegisterComponent', () => {
 
   describe('Validation scenarios', () => {
     it('should be invalid when only firstName is filled', () => {
+      // Vérifie que le formulaire est invalide lorsque seul le champ firstName est rempli
       component.registerForm.patchValue({
         firstName: 'John',
         lastName: '',
@@ -207,10 +239,12 @@ describe('RegisterComponent', () => {
         password: '',
       });
 
+      // Vérifie que le formulaire est invalide
       expect(component.registerForm.valid).toBe(false);
     });
 
     it('should be valid when all fields are filled', () => {
+      // Vérifie que le formulaire est valide lorsque tous les champs sont remplis
       component.registerForm.patchValue({
         firstName: 'John',
         lastName: 'Doe',
@@ -218,6 +252,7 @@ describe('RegisterComponent', () => {
         password: 'password123',
       });
 
+      // Vérifie que le formulaire est valide
       expect(component.registerForm.valid).toBe(true);
     });
   });

@@ -2,16 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { EtudiantService } from './etudiant.service';
 import { expect, describe, it, beforeEach, afterEach } from '@jest/globals';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { 
+import {
     provideHttpClientTesting,
     HttpTestingController
 } from '@angular/common/http/testing';
 
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('EtudiantService', () => {
   let service: EtudiantService;
   let httpMock: HttpTestingController;
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(() => {
         TestBed.configureTestingModule({
         providers: [
@@ -25,15 +27,19 @@ describe('EtudiantService', () => {
     httpMock = TestBed.inject(HttpTestingController);
     });
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     afterEach(() => {
         httpMock.verify();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should be created', () => {
         expect(service).toBeTruthy();
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('getEtudiants', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return an Observable<Etudiant[]>', () => {
             const mockResponse: any[] = [
                 { id: 1, name: 'John Doe' },
@@ -54,7 +60,9 @@ describe('EtudiantService', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('getEtudiantById', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return an Observable<Etudiant>', () => {
             const mockResponse: any = { id: 1, name: 'John Doe' };
 
@@ -72,7 +80,9 @@ describe('EtudiantService', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('createEtudiant', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return an Observable<Object> when creating an etudiant', () => {
             const mockResponse = {
                 message: 'Etudiant created successfully'
@@ -87,7 +97,7 @@ describe('EtudiantService', () => {
                 .subscribe((res) => {
                     expect(res).toEqual(mockResponse);
                 });
-            
+
             const req = httpMock.expectOne('/api/etudiant');
 
             expect(req.request.method).toBe('POST');
@@ -102,7 +112,9 @@ describe('EtudiantService', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('updateEtudiant', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return an Observable<Object> when updating an etudiant', () => {
             const mockResponse = {
                 message: 'Etudiant updated successfully'
@@ -132,7 +144,9 @@ describe('EtudiantService', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('deleteEtudiant', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return an Observable<Object> when deleting an etudiant', () => {
             const mockResponse = {
                 message: 'Etudiant deleted successfully'

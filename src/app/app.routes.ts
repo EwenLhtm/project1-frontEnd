@@ -9,6 +9,7 @@ import {EtuCreateComponent} from './pages/etudiant/create/etuCreate.component';
 import {EtuUpdateComponent} from './pages/etudiant/update/etuUpdate.component';
 import {EtuDeleteComponent} from './pages/etudiant/delete/etuDelete.component';
 
+// Declaration des routes et protection des ecrans reserves aux utilisateurs connectes.
 export const routes: Routes = [
   {
     path: '',

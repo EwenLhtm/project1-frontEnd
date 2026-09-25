@@ -13,12 +13,14 @@ const routerMock = {
     navigate: jest.fn(),
 };
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('EtuCreateComponent', () => {
     let component: EtuCreateComponent;
     let fixture: ComponentFixture<EtuCreateComponent>;
     let etudiantService: EtudiantService;
     let router: Router;
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(async () => {
         etudiantServiceMock.createEtudiant.mockReset();
         routerMock.navigate.mockReset();
@@ -40,10 +42,12 @@ describe('EtuCreateComponent', () => {
         fixture.detectChanges();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should call etudiantService.createEtudiant when form is valid', () => {
         etudiantServiceMock.createEtudiant.mockReturnValue(of(null));
 
@@ -57,7 +61,9 @@ describe('EtuCreateComponent', () => {
         expect(etudiantServiceMock.createEtudiant).toHaveBeenCalled();
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('onIgnit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should create form with required validators', () => {
             expect(component.createForm).toBeDefined();
             expect(component.createForm.get('firstName')?.validator).toBeDefined();
@@ -76,19 +82,24 @@ describe('EtuCreateComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('form getter', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should return form controls', () => {
             const controls = component.form;
             expect(controls).toBe(component.createForm.controls);
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('onSubmit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should set submitted to true', () => {
             component.onSubmit();
             expect(component.submitted).toBe(true);
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should not call register if form is invalid', () => {
             component.createForm.patchValue({
                 firstName: '',
@@ -99,6 +110,7 @@ describe('EtuCreateComponent', () => {
             expect(etudiantServiceMock.createEtudiant).not.toHaveBeenCalled();
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should call etudiantService.createEtudiant when form is valid', () => {
             component.createForm.patchValue({
                 firstName: 'John',
@@ -117,6 +129,7 @@ describe('EtuCreateComponent', () => {
             });
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to /etudiant on success', () => {
             etudiantServiceMock.createEtudiant.mockReturnValue(of(null));
 
@@ -131,6 +144,7 @@ describe('EtuCreateComponent', () => {
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant']);
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should NOT navigate on error', () => {
             etudiantServiceMock.createEtudiant.mockReturnValue(throwError(() => new Error('Error')));
 
@@ -146,7 +160,9 @@ describe('EtuCreateComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('onReset', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should reset the form and set submitted to false', () => {
             component.submitted = true;
             component.createForm.patchValue({
@@ -165,7 +181,9 @@ describe('EtuCreateComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('Validation scenarios', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should be invalid when only firstName is provided', () => {
             component.createForm.patchValue({
                 firstName: 'John',
@@ -175,6 +193,7 @@ describe('EtuCreateComponent', () => {
             expect(component.createForm.valid).toBe(false);
         });
 
+        // Verification du scenario et des assertions de ce test.
         it('should be valid when all fields are filled', () => {
             component.createForm.patchValue({
                 firstName: 'John',

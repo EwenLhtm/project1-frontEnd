@@ -20,6 +20,7 @@ export class listComponent implements OnInit {
     etudiants: Etudiant[] = [];
 
 
+    // Initialisation du composant et chargement des donnees necessaires.
     ngOnInit() {
         this.etudiantService.getEtudiants()
             .pipe(takeUntilDestroyed(this.destroyRef))
@@ -30,22 +31,26 @@ export class listComponent implements OnInit {
                 error: () => {
                     this.router.navigate(['/login']);
                 }
-                 
+
             })
     }
 
+    // Ouverture de la page de detail de l etudiant selectionne.
     detailEtudiant(id: number) {
         this.router.navigate(['/etudiant/detail', id]);
     }
 
+    // Mise a jour de l etudiant identifie avec les nouvelles donnees.
     updateEtudiant(id: number) {
         this.router.navigate(['/etudiant/update', id]);
     }
 
+    // Suppression de l etudiant correspondant a l identifiant fourni.
     deleteEtudiant(id: number) {
         this.router.navigate(['/etudiant/delete', id]);
     }
 
+    // Envoi des donnees d un nouvel etudiant a l API.
     createEtudiant() {
         this.router.navigate(['/etudiant/create']);
     }

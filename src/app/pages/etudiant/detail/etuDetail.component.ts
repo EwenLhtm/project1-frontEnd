@@ -20,6 +20,7 @@ export class EtuDetailComponent implements OnInit {
     private router = inject(Router);
     etudiant: Etudiant | null = null;
 
+    // Initialisation du composant et chargement des donnees necessaires.
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             const id = Number(params.get('id'));
@@ -36,8 +37,9 @@ export class EtuDetailComponent implements OnInit {
         })
     }
 
+    // Execution de cette operation du composant ou du service.
     goBack() {
         this.router.navigate(['/etudiant']);
     }
-    
+
 }

@@ -1,10 +1,13 @@
-// Inscription → connexion → ajout → consultation → modification → suppression
+// Inscription â†’ connexion â†’ ajout â†’ consultation â†’ modification â†’ suppression
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('test du parcours complet', () => {
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(() => {
         cy.login('test', 'test');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display the registration form', () => {
         cy.visit('/register');
         cy.get('form').should('be.visible');
@@ -15,6 +18,7 @@ describe('test du parcours complet', () => {
         cy.get('button[type="submit"]').should('be.visible');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display required error when required field is empty wwhen creating a user', () => {
         cy.visit('/register');
         cy.get('button[type="submit"]').click();
@@ -29,7 +33,7 @@ describe('test du parcours complet', () => {
             .find('.invalid-feedback')
             .should('be.visible')
             .and('contain', 'First Name is required');
-        
+
         cy.get('input[formControlName="login"]')
             .parent()
             .find('.invalid-feedback')
@@ -43,6 +47,7 @@ describe('test du parcours complet', () => {
             .and('contain', 'password is required');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should reset the registration form when reset button is clicked', () => {
         cy.visit('/register');
         cy.get('input[formControlName="firstName"]').type('John');
@@ -58,6 +63,7 @@ describe('test du parcours complet', () => {
         cy.get('input[formControlName="password"]').should('have.value', '');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should register a new user and navigate to login page', () => {
         cy.visit('/register');
         // Remplir le formulaire d'inscription
@@ -75,6 +81,7 @@ describe('test du parcours complet', () => {
         cy.url().should('include', '/login');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display required error when required field is empty when logging in', () => {
         cy.visit('/login');
         cy.get('button[type="submit"]').click();
@@ -91,10 +98,11 @@ describe('test du parcours complet', () => {
             .and('contain', 'Please enter a valid password.');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display the login form and login', () => {
         cy.visit('/login');
 
-        // Vérifier que le formulaire de connexion est visible
+        // VÃ©rifier que le formulaire de connexion est visible
         cy.get('form').should('be.visible');
         cy.get('input[formControlName="login"]').should('be.visible');
         cy.get('input[formControlName="password"]').should('be.visible');
@@ -109,7 +117,7 @@ describe('test du parcours complet', () => {
         cy.get('input[formControlName="login"]').should('have.value', '');
         cy.get('input[formControlName="password"]').should('have.value', '');
 
-        // Remplir à nouveau le formulaire de connexion
+        // Remplir Ã  nouveau le formulaire de connexion
         cy.get('input[formControlName="login"]').type('johndoe');
         cy.get('input[formControlName="password"]').type('password');
         cy.get('button[type="submit"]').click();
@@ -117,6 +125,7 @@ describe('test du parcours complet', () => {
         cy.url().should('include', '/');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display the etudiant list', () => {
         cy.visit('/etudiant');
         cy.get('table').should('be.visible');
@@ -124,6 +133,7 @@ describe('test du parcours complet', () => {
         cy.get('button[name="createEtudiant"]').should('be.visible');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display required error when required field is empty when creating an etudiant', () => {
     cy.visit('/etudiant');
     cy.get('button[name="createEtudiant"]').click();
@@ -133,7 +143,7 @@ describe('test du parcours complet', () => {
     // Remplir aucun champ et soumettre le formulaire
     cy.get('button[type="submit"]').click();
 
-    // Vérifier le message de validation
+    // VÃ©rifier le message de validation
     cy.get('input[formControlName="lastName"]')
         .parent()
         .find('.invalid-feedback')
@@ -153,6 +163,7 @@ describe('test du parcours complet', () => {
         .and('contain', 'Email is required');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should create a new etudiant and view its details', () => {
         cy.visit('/etudiant');
         cy.get('button[name="createEtudiant"]').click();
@@ -177,12 +188,13 @@ describe('test du parcours complet', () => {
             cy.get('button[name="detailEtudiant"]').click();
         });
         cy.url().should('include', '/etudiant/');
-        cy.get('h5').contains('Détails de l\'étudiant').should('be.visible');
+        cy.get('h5').contains('DÃ©tails de l\'Ã©tudiant').should('be.visible');
         cy.get('td[name="firstName"]').contains('Jane').should('be.visible');
         cy.get('td[name="lastName"]').contains('Smith').should('be.visible');
         cy.get('td[name="email"]').contains('jane.smith@example.com').should('be.visible');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should display required error when required field is empty when updating an etudiant', () => {
         cy.visit('/etudiant');
         cy.get('tbody tr').contains('Jane').parent('tr').within(() => {
@@ -197,7 +209,7 @@ describe('test du parcours complet', () => {
         cy.get('input[formControlName="email"]').clear();
         cy.get('button[type="submit"]').click();
 
-        // Vérifier le message de validation
+        // VÃ©rifier le message de validation
         cy.get('input[formControlName="lastName"]')
             .parent()
             .find('.invalid-feedback')
@@ -217,6 +229,7 @@ describe('test du parcours complet', () => {
             .and('contain', 'Email is required');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should update the etudiant details', () => {
         cy.visit('/etudiant');
         cy.get('tbody tr').contains('Jane').parent('tr').within(() => {
@@ -235,6 +248,7 @@ describe('test du parcours complet', () => {
         cy.get('tbody tr').contains('Doe').should('be.visible');
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should delete the etudiant', () => {
         cy.visit('/etudiant');
         cy.get('tbody tr').contains('John').parent('tr').within(() => {
@@ -252,4 +266,4 @@ describe('test du parcours complet', () => {
         cy.get('tbody tr').contains('John').should('not.exist');
         cy.get('tbody tr').contains('Doe').should('not.exist');
     });
-}); 
+});

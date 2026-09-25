@@ -19,12 +19,14 @@ const routeMock = {
   })
 };
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('EtuDeleteComponent', () => {
     let component: EtuDeleteComponent;
     let fixture: ComponentFixture<EtuDeleteComponent>;
     let etudiantService: EtudiantService;
     let router: Router;
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(async () => {
         etudiantServiceMock.getEtudiantById.mockReset();
         etudiantServiceMock.deleteEtudiant.mockReset();
@@ -48,17 +50,21 @@ describe('EtuDeleteComponent', () => {
         fixture.detectChanges();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('ngOnInit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should fetch etudiant by id and set it to component', () => {
             const mockEtudiant = { id: 1, name: 'John Doe' };
             etudiantServiceMock.getEtudiantById.mockReturnValue(of(mockEtudiant));
             component.ngOnInit();
             expect(component.etudiant).toEqual(mockEtudiant);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to /etudiant on error', () => {
             etudiantServiceMock.getEtudiantById.mockReturnValue(throwError(() => new Error('Error')));
             component.ngOnInit();
@@ -66,7 +72,9 @@ describe('EtuDeleteComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('deleteEtudiant', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should call deleteEtudiant and navigate to /etudiant on success', () => {
             const mockEtudiant = { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' };
             component.etudiant = mockEtudiant;
@@ -77,7 +85,9 @@ describe('EtuDeleteComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('goBack', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should navigate back to etudiant list', () => {
             component.goBack();
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant']);

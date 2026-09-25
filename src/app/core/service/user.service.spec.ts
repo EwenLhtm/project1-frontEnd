@@ -7,10 +7,12 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('UserService', () => {
   let service: UserService;
   let httpMock: HttpTestingController;
 
+  // Preparation ou nettoyage du contexte commun a chaque test.
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -24,15 +26,19 @@ describe('UserService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
+  // Preparation ou nettoyage du contexte commun a chaque test.
   afterEach(() => {
     httpMock.verify();
   });
 
+  // Verification du scenario et des assertions de ce test.
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
+  // Regroupement des tests lies a cette fonctionnalite.
   describe('register', () => {
+      // Verification du scenario et des assertions de ce test.
       it('should return an Observable<Object> when registration is successful', () => {
         const mockResponse = {
           message: 'Registration successful',
@@ -64,7 +70,9 @@ describe('UserService', () => {
       });
   });
 
+  // Regroupement des tests lies a cette fonctionnalite.
   describe('login', () => {
+      // Verification du scenario et des assertions de ce test.
       it('should return an Observable<Object> when login is successful', () => {
         const mockResponse = {
           message: 'Login successful',

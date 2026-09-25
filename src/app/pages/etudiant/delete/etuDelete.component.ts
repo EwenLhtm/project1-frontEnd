@@ -20,6 +20,7 @@ export class EtuDeleteComponent implements OnInit {
     private destroyRef = inject(DestroyRef);
     etudiant: Etudiant | null = null;
 
+    // Initialisation du composant et chargement des donnees necessaires.
     ngOnInit() {
         this.route.params.subscribe(params => {
                 const id = Number(params['id']);
@@ -36,6 +37,7 @@ export class EtuDeleteComponent implements OnInit {
             });
     }
 
+    // Suppression de l etudiant correspondant a l identifiant fourni.
     deleteEtudiant() {
         if (this.etudiant && this.etudiant.id) {
             this.etudiantService.deleteEtudiant(this.etudiant.id)
@@ -48,6 +50,7 @@ export class EtuDeleteComponent implements OnInit {
         }
     }
 
+    // Execution de cette operation du composant ou du service.
     goBack() {
         this.router.navigate(['/etudiant']);
     }

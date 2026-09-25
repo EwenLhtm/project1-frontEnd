@@ -22,6 +22,7 @@ export class EtuCreateComponent implements OnInit {
     createForm: FormGroup = new FormGroup({});
     submitted: boolean = false;
 
+    // Initialisation du composant et chargement des donnees necessaires.
     ngOnInit() {
         this.createForm = this.formBuilder.group({
             firstName: ['', Validators.required],
@@ -34,6 +35,7 @@ export class EtuCreateComponent implements OnInit {
         return this.createForm.controls;
     }
 
+    // Validation du formulaire et declenchement de l operation demandee.
     onSubmit(): void {
         this.submitted = true;
         if (this.createForm.invalid) {
@@ -58,6 +60,7 @@ export class EtuCreateComponent implements OnInit {
             });
     }
 
+    // Reinitialisation du formulaire et de son etat de soumission.
     onReset(): void {
         this.submitted = false;
         this.createForm.reset();

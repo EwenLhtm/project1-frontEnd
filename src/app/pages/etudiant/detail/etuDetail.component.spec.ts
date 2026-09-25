@@ -23,12 +23,14 @@ const routeMock = {
     })
 };
 
+// Regroupement des tests lies a cette fonctionnalite.
 describe('EtuDetailComponent', () => {
     let component: EtuDetailComponent;
     let fixture: ComponentFixture<EtuDetailComponent>;
     let etudiantService: EtudiantService;
     let router: Router;
 
+    // Preparation ou nettoyage du contexte commun a chaque test.
     beforeEach(async () => {
         etudiantServiceMock.getEtudiantById.mockReset();
         routerMock.navigate.mockReset();
@@ -51,17 +53,21 @@ describe('EtuDetailComponent', () => {
         fixture.detectChanges();
     });
 
+    // Verification du scenario et des assertions de ce test.
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('ngOnInit', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should fetch etudiant by id and set it to component', () => {
             const mockEtudiant = { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' };
             etudiantServiceMock.getEtudiantById.mockReturnValue(of(mockEtudiant));
             component.ngOnInit();
             expect(component.etudiant).toEqual(mockEtudiant);
         });
+        // Verification du scenario et des assertions de ce test.
         it('should navigate to /etudiant on error', () => {
             etudiantServiceMock.getEtudiantById.mockReturnValue(throwError(() => new Error('Error')));
             component.ngOnInit();
@@ -69,7 +75,9 @@ describe('EtuDetailComponent', () => {
         });
     });
 
+    // Regroupement des tests lies a cette fonctionnalite.
     describe('goBack', () => {
+        // Verification du scenario et des assertions de ce test.
         it('should navigate back to etudiant list', () => {
             component.goBack();
             expect(routerMock.navigate).toHaveBeenCalledWith(['/etudiant']);

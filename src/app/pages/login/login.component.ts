@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup = new FormGroup({});
     submitted: boolean = false;
 
+    // Initialisation du composant et chargement des donnees necessaires.
     ngOnInit() {
         this.loginForm = this.formBuilder.group(
             {
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
         return this.loginForm.controls;
     }
 
+    // Validation du formulaire et declenchement de l operation demandee.
     onSubmit(): void {
         this.submitted = true;
         if (this.loginForm.invalid) {
@@ -56,6 +58,7 @@ export class LoginComponent implements OnInit {
         );
     }
 
+    // Reinitialisation du formulaire et de son etat de soumission.
     onReset(): void {
         this.submitted = false;
         this.loginForm.reset();
